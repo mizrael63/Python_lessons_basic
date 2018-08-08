@@ -13,3 +13,47 @@
 # Для решения данной задачи используйте алгоритмы из задания easy,
 # оформленные в виде соответствующих функций,
 # и импортированные в данный файл из easy.py
+#import easy #если предположить что файл сохранится в папке под этим именем
+
+def redir(): #возвращает список папок текущей директории
+    import os
+    for i in os.listdir('.'):
+        if os.path.isdir(i):
+            print(i)
+while True:
+    print('''
+    Меню:
+        1. Перейти в папку
+        2. Просмотреть содержимое текущей папки
+        3. Удалить папку
+        4. Создать папку
+        5. Выйти
+    ''')
+    b = input('Выберите дейстивие: ')
+    if b == '1':
+        name = input('Введите название папки: ')
+        try:
+            os.chdir(name)
+            print('Успешно перешли в', name)
+        except Exception:
+            print('Невозможно перейти в', name)
+    elif b == '2':
+        redir()
+    elif b == '3':
+        name = input('Введите название папки: ')
+        try:
+            os.rmdir(name)
+            print('Успешно удалили', name)
+        except Exception:
+            print('Невозможно удалить', name)
+    elif b == '4':
+        name = input('Введите название папки: ')
+        try:
+            os.mkdir(name, mode=0o777)
+            print('Успешно создали', name)
+        except Exception:
+            print('Невозможно создать', name)
+    elif b == '5':
+        break
+    else:
+        print('Неизвестное действие')
